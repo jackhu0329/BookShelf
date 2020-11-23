@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TestGameFrame;
+using GameFrame;
 
 public class TaskFanctory 
 {
@@ -9,7 +10,7 @@ public class TaskFanctory
     {
         var temptasks = new List<TaskBase>
         {
-
+            new BookTask()
         };
         return temptasks;
     }

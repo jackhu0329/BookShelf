@@ -9,7 +9,13 @@ namespace GameFrame
         // Start is called before the first frame update
         public GameEntityBase Shelf;
 
-        public GameEntityBase Book;
+        public GameEntityBase Book1;
+
+        public GameEntityBase Book2;
+
+        public GameEntityBase Book3;
+
+        public GameEntityBase Book4;
 
         //public GameEntityBase Bottle;
 

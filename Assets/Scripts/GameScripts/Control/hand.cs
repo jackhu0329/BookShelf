@@ -5,6 +5,7 @@ using UnityEngine;
 using Valve.VR;
 using Valve.VR.InteractionSystem;
 using HTC.UnityPlugin.Vive;
+using GameFrame;
 
 public class hand : MonoBehaviour
 {
@@ -22,11 +23,12 @@ public class hand : MonoBehaviour
     {
         mPose = GetComponent<SteamVR_Behaviour_Pose>();
         mJoint = GetComponent<FixedJoint>();
+        GameEventCenter.AddEvent("ResetHand", ResetHand);
     }
 
     void Spawn()
     {
-        GameEventCenter.DispatchEvent("SpawnCup");
+        GameEventCenter.DispatchEvent("SpawnBook");
     }
     // Update is called once per frame
     void Update()
@@ -103,6 +105,7 @@ public class hand : MonoBehaviour
 
         mCurrentInteractable.transform.position = transform.position;
 
+        GameEventCenter.DispatchEvent("BookNumber", mCurrentInteractable.GetComponent<BookEntity>().n+1); 
 
         Rigidbody targetBody = mCurrentInteractable.GetComponent<Rigidbody>();
         mJoint.connectedBody = targetBody;
@@ -114,6 +117,8 @@ public class hand : MonoBehaviour
     {
         if (!mCurrentInteractable)
             return;
+
+        GameEventCenter.DispatchEvent("BookNumber", 0);
 
         /*mCurrentInteractable.transform.position = originPosition;
         mCurrentInteractable.transform.rotation = originRotation;*/

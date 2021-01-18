@@ -15,24 +15,26 @@ namespace GameFrame
         {
             //FloatingText = GameEntityManager.Instance.GetCurrentSceneRes<MainSceneRes>().FloatingText.gameObject;
             particleObj = gameObject.GetComponentInChildren<ParticleSystem>();
-            GameEventCenter.AddEvent("ParticleStart", ParticleStart);
+            GameEventCenter.AddEvent<Vector3>("ParticleStart", ParticleStart);
         }
 
         // Update is called once per frame
         void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Q))
+            if (Input.GetKeyDown(KeyCode.Z))
             {
-               // GameObject.Instantiate(FloatingText, transform.position, Quaternion.identity);
-                Debug.Log("particleObj2");
+                // GameObject.Instantiate(FloatingText, transform.position, Quaternion.identity);
+                Debug.Log("particleObj QQQQ");
+                GameEventCenter.DispatchEvent<AudioSelect>("PlayAudio", AudioSelect.GetScore);
                 particleObj.Play();
             }
         }
 
-        private void ParticleStart()
+        private void ParticleStart(Vector3 v)
         {
-            objPosition = GameObject.Find("CupRegular(Clone)").transform.position;
-            transform.position = objPosition;
+            objPosition = GameObject.Find("Wipe_1").transform.position;
+
+            transform.position = new Vector3(v.x, v.y, v.z);
             //GameObject.Instantiate(FloatingText, transform.position, Quaternion.identity);
             particleObj.Play();
         }

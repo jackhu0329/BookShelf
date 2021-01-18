@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using GameFrame;
 public class GameSceneUI : MonoBehaviour
 {
     private int score = 0;
@@ -31,7 +31,7 @@ public class GameSceneUI : MonoBehaviour
     void Update()
     {
         //test
-        if (Input.GetKeyDown(KeyCode.Q))
+        /*if (Input.GetKeyDown(KeyCode.Q))
         {
             GameEventCenter.DispatchEvent("SuccessHigh",1);
             GameEventCenter.DispatchEvent("SuccessMid", 2);
@@ -42,7 +42,7 @@ public class GameSceneUI : MonoBehaviour
         {
             //GameEventCenter.DispatchEvent("BookNumber", 0);
             GameEventCenter.DispatchEvent("BookNumber", 1);
-        }
+        }*/
         //test
 
 
@@ -71,6 +71,7 @@ public class GameSceneUI : MonoBehaviour
             TimerEnd();
             time.text = "花費時間:" + Mathf.FloorToInt(timer);
             scoreText.text = "任務完成數: "+score;
+            GameEventCenter.DispatchEvent<AudioSelect>("PlayAudio", AudioSelect.EndAudio);
             transform.GetComponent<Canvas>().transform.GetChild(0).gameObject.SetActive(true);
         }
     }

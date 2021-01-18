@@ -84,6 +84,8 @@ namespace GameFrame
                 GameEventCenter.DispatchEvent("SpawnBook");
                 GameEventCenter.DispatchEvent("SuccessLow", type);
                 GameEventCenter.DispatchEvent("GetScore");
+                GameEventCenter.DispatchEvent<Vector3>("ParticleStart", transform.position);
+                GameEventCenter.DispatchEvent<AudioSelect>("PlayAudio", AudioSelect.GetScore);
                 GameEventCenter.DispatchEvent("ResetHand");
                 Destroy(this.gameObject);
                 Debug.Log("check 1");
@@ -93,6 +95,8 @@ namespace GameFrame
                 GameEventCenter.DispatchEvent("SpawnBook");
                 GameEventCenter.DispatchEvent("SuccessMid", type);
                 GameEventCenter.DispatchEvent("GetScore");
+                GameEventCenter.DispatchEvent<Vector3>("ParticleStart", transform.position);
+                GameEventCenter.DispatchEvent<AudioSelect>("PlayAudio", AudioSelect.GetScore);
                 GameEventCenter.DispatchEvent("ResetHand");
                 Destroy(this.gameObject);
                 Debug.Log("check 2");
@@ -102,6 +106,8 @@ namespace GameFrame
                 GameEventCenter.DispatchEvent("SpawnBook");
                 GameEventCenter.DispatchEvent("SuccessHigh", type);
                 GameEventCenter.DispatchEvent("GetScore");
+                GameEventCenter.DispatchEvent<Vector3>("ParticleStart", transform.position);
+                GameEventCenter.DispatchEvent<AudioSelect>("PlayAudio", AudioSelect.GetScore);
                 GameEventCenter.DispatchEvent("ResetHand");
                 Destroy(this.gameObject);
                 Debug.Log("check 2");
@@ -111,6 +117,7 @@ namespace GameFrame
                 Debug.Log("check fail");
                 GameEventCenter.DispatchEvent("SpawnBook");
                 GameEventCenter.DispatchEvent("ResetHand");
+                GameEventCenter.DispatchEvent<AudioSelect>("PlayAudio", AudioSelect.fail);
                 Destroy(this.gameObject);
                 GameEventCenter.DispatchEvent("MotionFailed");
             }

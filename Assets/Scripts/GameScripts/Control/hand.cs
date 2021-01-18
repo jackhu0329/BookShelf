@@ -18,6 +18,9 @@ public class hand : MonoBehaviour
 
     public int testHand;
 
+    private float timer = 0;
+    private bool hasCorrection = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -34,18 +37,28 @@ public class hand : MonoBehaviour
     void Update()
     {
 
-        if (ViveInput.GetPressDown(HandRole.RightHand, ControllerButton.Menu))
-        {
-            if (mGrabAction.GetStateDown(mPose.inputSource))
-            {
-                Spawn();
-            }
-        }
 
-        //按下Left Menu時觸發
-        if (ViveInput.GetPressDown(HandRole.LeftHand, ControllerButton.Menu))
+        if (mGrabAction.GetStateDown(mPose.inputSource))
         {
-            
+            timer += Time.deltaTime;
+            if (timer >= 2.0f && !hasCorrection)
+            {
+                //GameEntityManager.Instance.GetCurrentSceneRes<MainSceneRes>().mainSceneUI.SetUIActive(0, false);
+                //GameEventCenter.DispatchEvent<Vector3>(EventName.EnableCameraRig, this.transform.position);
+                GameEventCenter.DispatchEvent<Vector3>("CameraCorrection", transform.position);
+                GameEventCenter.DispatchEvent("CorrectionUI");
+                hasCorrection = true;
+                //Correction.hasCorrection = true;
+            }
+
+            Debug.Log(mPose.inputSource + " down ");
+            //Pickup();
+        }
+        if (mGrabAction.GetStateUp(mPose.inputSource))
+        {
+            Debug.Log(mPose.inputSource + " up ");
+            //Drop();
+
         }
 
         if (mGrabAction.GetStateDown(mPose.inputSource))

@@ -14,14 +14,15 @@ public class GameSceneUI : MonoBehaviour
     private int failCount = 0;
     private int count=0;
     private string[] t;
+
+    private bool hasCorrection = false;
     // Start is called before the first frame update
     void Awake()
     {
-        t = new string[5];
-        t[0] = "12345";
         timer = 0;
         transform.GetComponent<Canvas>().transform.GetChild(0).gameObject.SetActive(false);
         GameEventCenter.AddEvent("GetScore", GetScore);
+        GameEventCenter.AddEvent("CorrectionUI", CorrectionUI);
         GameEventCenter.AddEvent("MotionFailed", MotionFailed);
         GameEventCenter.AddEvent<int>("BookNumber", BookNumber);
         TimerStart();
@@ -46,7 +47,7 @@ public class GameSceneUI : MonoBehaviour
         //test
 
 
-        if (timerBool)
+        if (timerBool&&hasCorrection)
         {
             timer += Time.deltaTime;
         }
@@ -82,7 +83,7 @@ public class GameSceneUI : MonoBehaviour
         gameUI.normal.textColor = new Color(255, 255, 255);
         gameUI.fontSize = 60;
 
-        if (UI)
+        if (UI&&hasCorrection)
         {
             GUI.Label(new Rect(Screen.width / 10 * 1, (Screen.height / 6 * 5), 200, 100),
             "已完成" + score + "次"
@@ -119,7 +120,18 @@ public class GameSceneUI : MonoBehaviour
 
 
         }
+        else
+        {
+            GUI.Label(new Rect(Screen.width / 10 *3, (Screen.height / 6 * 1), 200, 100),
+            "請伸直手臂並按住扳機鍵進行校正"
+            , gameUI);
+        }
 
+    }
+
+    private void CorrectionUI()
+    {
+        hasCorrection = true;
     }
 
     public void GetScore()

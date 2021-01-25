@@ -13,9 +13,17 @@ public class MainUI : MonoBehaviour
     public Button settingButton;
     public InputField scriptName;
 
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Z))
+        {
+            GameSceneManager.Instance.Change2MainScene();
+        }
+    }
     private void Start()
     {
-        GameSceneManager.Instance.Change2MainScene();
+        
         startButton.onClick.AddListener(StartButtonClick);
         settingButton.onClick.AddListener(SettingButtonClick);
     }

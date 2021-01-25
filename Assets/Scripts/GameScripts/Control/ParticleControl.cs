@@ -32,7 +32,7 @@ namespace GameFrame
 
         private void ParticleStart(Vector3 v)
         {
-            objPosition = GameObject.Find("Wipe_1").transform.position;
+            //objPosition = GameObject.Find("Wipe_1").transform.position;
 
             transform.position = new Vector3(v.x, v.y, v.z);
             //GameObject.Instantiate(FloatingText, transform.position, Quaternion.identity);

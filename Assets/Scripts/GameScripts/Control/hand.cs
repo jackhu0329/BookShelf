@@ -29,38 +29,45 @@ public class hand : MonoBehaviour
         GameEventCenter.AddEvent("ResetHand", ResetHand);
     }
 
-    void Spawn()
-    {
-        GameEventCenter.DispatchEvent("SpawnBook");
-    }
+
     // Update is called once per frame
     void Update()
     {
-
-
-        if (mGrabAction.GetStateDown(mPose.inputSource))
+        if (ViveInput.GetPress(HandRole.RightHand, ControllerButton.Menu))
         {
+            Debug.Log("CorrectionUI:" + timer);
             timer += Time.deltaTime;
             if (timer >= 2.0f && !hasCorrection)
             {
-                //GameEntityManager.Instance.GetCurrentSceneRes<MainSceneRes>().mainSceneUI.SetUIActive(0, false);
-                //GameEventCenter.DispatchEvent<Vector3>(EventName.EnableCameraRig, this.transform.position);
                 GameEventCenter.DispatchEvent<Vector3>("CameraCorrection", transform.position);
                 GameEventCenter.DispatchEvent("CorrectionUI");
                 hasCorrection = true;
-                //Correction.hasCorrection = true;
+                //Pickup();
+            }
+        }
+
+        /*if (mGrabAction.GetStateDown(mPose.inputSource))
+        {
+            Debug.Log("CorrectionUI:"+timer);
+            timer += Time.deltaTime;
+            if (timer >= 2.0f && !hasCorrection)
+            {
+                GameEventCenter.DispatchEvent<Vector3>("CameraCorrection", transform.position);
+                GameEventCenter.DispatchEvent("CorrectionUI");
+                hasCorrection = true;
+                Pickup();
             }
 
             Debug.Log(mPose.inputSource + " down ");
-            //Pickup();
+            Pickup();
         }
         if (mGrabAction.GetStateUp(mPose.inputSource))
         {
             Debug.Log(mPose.inputSource + " up ");
-            //Drop();
+            Drop();
 
-        }
-
+        }*/
+        Debug.Log(" ???? ");
         if (mGrabAction.GetStateDown(mPose.inputSource))
         {
             Debug.Log(mPose.inputSource + " down ");
@@ -116,7 +123,7 @@ public class hand : MonoBehaviour
         //mCurrentInteractable.transform.position =new Vector3(transform.position.x - 0.2f, transform.position.y-0.2f, transform.position.z);
         //mCurrentInteractable.transform.eulerAngles = new Vector3(transform.rotation.x , 0 , -90);
 
-        mCurrentInteractable.transform.position = transform.position;
+        mCurrentInteractable.transform.position = new Vector3(transform.position.x , transform.position.y -1.5f, transform.position.z);
 
         GameEventCenter.DispatchEvent("BookNumber", mCurrentInteractable.GetComponent<BookEntity>().n+1); 
 

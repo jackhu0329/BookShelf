@@ -34,6 +34,8 @@ namespace GameFrame
         public void OnTriggerEnter(Collider other)
         {
             timer = 0;
+            if (other.CompareTag("Hand"))
+                transform.GetComponent<Rigidbody>().isKinematic = false;
             //Debug.Log(other.name);
             /*if (other.CompareTag("Hand"))
             {
@@ -60,7 +62,7 @@ namespace GameFrame
 
         public void OnTriggerStay(Collider other)
         {
-            if(transform.gameObject.tag == "Finish")
+            if(transform.gameObject.tag == "Finish"|| other.CompareTag("Hand"))
             {
                // Debug.Log("QQQ");
                 return;
@@ -82,7 +84,7 @@ namespace GameFrame
             if (n==0&&obj=="low")
             {
                 GameEventCenter.DispatchEvent("SpawnBook");
-                GameEventCenter.DispatchEvent("SuccessLow", type);
+                GameEventCenter.DispatchEvent("SuccessLow", type-1);
                 GameEventCenter.DispatchEvent("GetScore");
                 GameEventCenter.DispatchEvent<Vector3>("ParticleStart", transform.position);
                 GameEventCenter.DispatchEvent<AudioSelect>("PlayAudio", AudioSelect.GetScore);
@@ -93,7 +95,7 @@ namespace GameFrame
             else if (n == 1 && obj == "mid")
             {
                 GameEventCenter.DispatchEvent("SpawnBook");
-                GameEventCenter.DispatchEvent("SuccessMid", type);
+                GameEventCenter.DispatchEvent("SuccessMid", type-1);
                 GameEventCenter.DispatchEvent("GetScore");
                 GameEventCenter.DispatchEvent<Vector3>("ParticleStart", transform.position);
                 GameEventCenter.DispatchEvent<AudioSelect>("PlayAudio", AudioSelect.GetScore);
@@ -104,13 +106,13 @@ namespace GameFrame
             else if (n == 2 && obj == "high")
             {
                 GameEventCenter.DispatchEvent("SpawnBook");
-                GameEventCenter.DispatchEvent("SuccessHigh", type);
+                GameEventCenter.DispatchEvent("SuccessHigh", type-1);
                 GameEventCenter.DispatchEvent("GetScore");
                 GameEventCenter.DispatchEvent<Vector3>("ParticleStart", transform.position);
                 GameEventCenter.DispatchEvent<AudioSelect>("PlayAudio", AudioSelect.GetScore);
                 GameEventCenter.DispatchEvent("ResetHand");
                 Destroy(this.gameObject);
-                Debug.Log("check 2");
+                Debug.Log("check 3");
             }
             else
             {

@@ -80,8 +80,9 @@ public class GameSceneUI : MonoBehaviour
     private void OnGUI()
     {
         GUIStyle gameUI = new GUIStyle();
-        gameUI.normal.textColor = new Color(255, 255, 255);
+        gameUI.normal.textColor = new Color(0, 0, 0);
         gameUI.fontSize = 60;
+        gameUI.fontStyle = FontStyle.Bold;
 
         if (UI&&hasCorrection)
         {
@@ -93,7 +94,7 @@ public class GameSceneUI : MonoBehaviour
             , gameUI);*/
 
 
-            if (navigation == 1)
+            if (navigation == 3)
             {
                 GUI.Label(new Rect(Screen.width / 10 * 4, (Screen.height / 6 * 1), 200, 100),
                 "請將書本放到上層櫃子"
@@ -105,7 +106,7 @@ public class GameSceneUI : MonoBehaviour
                 "請將書本放到中間櫃子"
                 , gameUI);
             }
-            else if (navigation == 3)
+            else if (navigation == 1)
             {
                 GUI.Label(new Rect(Screen.width / 10 * 4, (Screen.height / 6 * 1), 200, 100),
                 "請將書本放到下層櫃子"
@@ -120,7 +121,7 @@ public class GameSceneUI : MonoBehaviour
 
 
         }
-        else
+        else if(UI)
         {
             GUI.Label(new Rect(Screen.width / 10 *3, (Screen.height / 6 * 1), 200, 100),
             "請伸直手臂並按住扳機鍵進行校正"

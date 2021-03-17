@@ -66,7 +66,7 @@ public class GameSceneUI : MonoBehaviour
             transform.GetComponent<Canvas>().transform.GetChild(0).gameObject.SetActive(true);
         }
 
-        if (count == 5)
+        if (count == GameDataManager.FlowData.count)
         {
             UI = false;
             TimerEnd();

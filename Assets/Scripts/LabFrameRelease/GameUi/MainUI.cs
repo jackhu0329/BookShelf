@@ -13,6 +13,10 @@ public class MainUI : MonoBehaviour
     public Button settingButton;
     public InputField scriptName;
 
+    public Button settingFinishButton;
+    public Dropdown time;
+    public Dropdown count;
+    private int timev, countv;
 
     private void Update()
     {
@@ -26,15 +30,19 @@ public class MainUI : MonoBehaviour
         
         startButton.onClick.AddListener(StartButtonClick);
         settingButton.onClick.AddListener(SettingButtonClick);
+        settingFinishButton.onClick.AddListener(FinishButtonClick);
     }
 
     public void StartButtonClick()
     {
         //MyGameData data = LabTools.GetData<MyGameData>(choose.captionText.text);
-        //GameFlowData gameFlow = new GameFlowData();
+        GameFlowData gameFlow = new GameFlowData();
         // Debug.Log(data.angle);
-        //GameDataManager.FlowData = gameFlow;
+        GameDataManager.FlowData = gameFlow;
         // GameDataManager.FlowData = new GameFlowData("01", data);
+
+        GameDataManager.FlowData.time = timev;
+        GameDataManager.FlowData.count = countv;
 
         //var Id = gameFlow.UserId;
 
@@ -49,4 +57,16 @@ public class MainUI : MonoBehaviour
         editor.SetActive(true);
 
     }
+
+    public void FinishButtonClick()
+    {
+        timev = time.value+1; 
+        countv = (count.value+1)*5;
+
+        Debug.Log(timev + " " + countv);
+        launcher.SetActive(true);
+        editor.SetActive(false);
+
+    }
+
 }

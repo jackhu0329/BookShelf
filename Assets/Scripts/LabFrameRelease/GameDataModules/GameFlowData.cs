@@ -19,6 +19,10 @@ namespace GameData
         /// </summary>
         public string UserId { get; set; } = "Test01";
 
+        public int time { get; set; } = 1;
+
+        public int count { get; set; } = 5;
+
         /// <summary>
         /// FlowData 构造函数
         /// </summary>

@@ -69,7 +69,7 @@ namespace GameFrame
             }
             Debug.Log(other.name);
             timer += Time.deltaTime;
-            if (timer > 2)
+            if (timer >= GameDataManager.FlowData.time)
             {
                 Debug.Log("timer trigger!!!!!!!!");
                 CheckStatus(other.name);
